@@ -12,3 +12,5 @@ dist/*
 .svn
 *.egg-info/*
 .noseids
+
+.git*
