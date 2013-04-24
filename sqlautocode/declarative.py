@@ -288,8 +288,7 @@ class ModelFactory(object):
                     if is_many_to_many_table:
                         s += "    __table__ = %s\n\n"%table_name
                     else:
-                        __tablename__ = table.schema + '.' + table_name if table.schema else table_name
-                        s += "    __tablename__ = '%s'\n\n"%__tablename__
+                        s += "    __tablename__ = '%s'\n\n"%table_name
                         if hasattr(cls, '__table_args__'):
                             #if cls.__table_args__[0]:
                                 #for fkc in cls.__table_args__[0]:
@@ -322,8 +321,8 @@ class ModelFactory(object):
         Temporal.__table_args__ = {} 
         
         #add in the schema
-        #if self.config.schema:
-            #Temporal.__table_args__[1]['schema'] = table.schema
+        if self.config.schema:
+            Temporal.__table_args__['schema'] = table.schema
 
         #trick sa's model registry to think the model is the correct name
         if model_name != 'Temporal':
