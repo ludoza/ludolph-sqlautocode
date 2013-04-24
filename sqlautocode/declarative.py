@@ -288,7 +288,8 @@ class ModelFactory(object):
                     if is_many_to_many_table:
                         s += "    __table__ = %s\n\n"%table_name
                     else:
-                        s += "    __tablename__ = '%s'\n\n"%table_name
+                        __tablename__ = table.schema + '.' + table_name if table.schema else table_name
+                        s += "    __tablename__ = '%s'\n\n"%__tablename__
                         if hasattr(cls, '__table_args__'):
                             #if cls.__table_args__[0]:
                                 #for fkc in cls.__table_args__[0]:
